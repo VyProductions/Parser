@@ -1,4 +1,4 @@
-# State List (ascending order; \eof0 and [start](1) implied; do not include):
+# State List (ascending order; $0 and [start](1) implied; do not include):
 +
 E
 *
@@ -7,7 +7,7 @@ E
 E
 )
 a
-# Token Processing Rules (ACTION table)
+# Token Processing rules (ACTION table)
 a 9 0 9 0 9 0 9 0 0 0
 + 0 2 0 -1 0 -2 0 2 -3 -4
 * 0 4 0 4 0 -2 0 4 -3 -4
@@ -16,4 +16,31 @@ a 9 0 9 0 9 0 9 0 0 0
 \eof 0 -5 0 -1 0 -2 0 0 -3 -4
 # Variable States (GOTO table)
 E 1 0 3 0 5 0 7 0 0 0
-# End of Parser Information
+# End of parser information
+
+# Note:
+#   In the State list (for K-1 total states):
+#       - Each state from the grammar production rules is listed in ascending
+#         order
+#       - The empty stack state ($0) and the start symbol are implied to be the
+#         first two entries, so they do not need to be listed
+#           ie, start from state 2 and go to state K-1
+#   In the ACTION table:
+#       - Each line starts with a terminal token from the grammar
+#       - \eof means the end of input symbol ($)
+#       - Positive integers imply shift rules (ie, 9 => s9)
+#       - Negative integers imply reduce rules (ie, -4 => r4)
+#       - 0 values imply an empty cell or no action
+#       - For \eof, the 'halt' action is denoted by the following:
+#           If the grammar has N production rules, then 'halt' = -(N + 1)
+#           ie, for the grammar in 'grammar.txt', we see N = 4, so 'halt' = -5
+#       - The integers given are in order from state 0 to state K-1 according
+#         to the state list
+#   In the GOTO table:
+#       - Each line starts with a nonterminal token from the grammar
+#       - Each integer in the line represents which state can be pushed on the
+#         stack given the state at the top of the stack
+#           ie, 1 can be pushed on the stack for GOTO(E, 0)
+#               5 can be pushed on the stack for GOTO(E, 4)
+#       - The integers are given in order from state 0 to state K-1 according
+#         to the state list

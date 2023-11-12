@@ -1,0 +1,20 @@
+# Grammar Separator (shouldn't match any tokens below):
+|
+# Nonterminal Tokens:
+E
+# Start Symbol Token:
+E
+# Terminal Tokens (use '\eps' for epsilon):
+a
++
+*
+(
+)
+# Grammar Productions (space-separated for input; lhs is 1 nonterminal token):
+E | E + E | E * E | ( E )
+E | a
+# End of Grammar
+
+# Note:
+#   Productions must start with nonterminal token and the final result in each
+#   line must be immediately followed by a '\n' (LF -- line feed) character.
